@@ -17,6 +17,7 @@ import SearchBar from './SearchBar';
 import NewChat from './NewChat';
 import { cn } from '~/utils';
 import store from '~/store';
+import AgentsSidebar from '../AgentsSidebar/AgentsSidebar';
 
 const BookmarkNav = lazy(() => import('./Bookmarks/BookmarkNav'));
 const AccountSettings = lazy(() => import('./AccountSettings'));
@@ -206,6 +207,7 @@ const Nav = memo(
                     className="flex h-full flex-col px-2 pb-3.5 md:px-3"
                   >
                     <div className="flex flex-1 flex-col" ref={outerContainerRef}>
+                      <AgentsSidebar />
                       <MemoNewChat
                         subHeaders={subHeaders}
                         toggleNav={toggleNavVisible}
