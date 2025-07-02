@@ -41,7 +41,7 @@ export function getOpenAIConfig(
     addParams,
     dropParams,
   } = options;
-  const { reasoning_effort, reasoning_summary, ...modelOptions } = _modelOptions;
+  const { reasoning_effort, reasoning_summary, disableStreaming, ...modelOptions } = _modelOptions;
   const llmConfig: Partial<t.ClientOptions> & Partial<t.OpenAIParameters> = Object.assign(
     {
       streaming,
@@ -49,6 +49,10 @@ export function getOpenAIConfig(
     },
     modelOptions,
   );
+
+  if (disableStreaming) {
+    llmConfig.streaming = false;
+  }
 
   if (addParams && typeof addParams === 'object') {
     Object.assign(llmConfig, addParams);

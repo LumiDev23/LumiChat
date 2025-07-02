@@ -107,6 +107,7 @@ export function getGoogleConfig(
 
   const {
     grounding,
+    disableStreaming,
     thinking = googleSettings.thinking.default,
     thinkingBudget = googleSettings.thinkingBudget.default,
     ...modelOptions
@@ -193,6 +194,10 @@ export function getGoogleConfig(
 
   if (grounding) {
     tools.push({ googleSearch: {} });
+  }
+
+  if (disableStreaming) {
+    llmConfig.streaming = false;
   }
 
   // Return the final shape
