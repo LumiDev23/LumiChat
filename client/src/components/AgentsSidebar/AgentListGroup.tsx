@@ -11,12 +11,16 @@ interface AgentListGroupProps {
 }
 
 const AgentListGroup: React.FC<AgentListGroupProps> = ({ title, agents, onAgentSelect }) => (
-  <div className="agent-list-group">
-    <h4 className="agent-list-group-title">{title}</h4>
-    <div className="agent-list-group-items">
-      {agents.map((agent) => (
-        <AgentListItem key={agent.id} agent={agent} onSelect={onAgentSelect} />
-      ))}
+  <div className="mb-2">
+    <div className="text-xs font-medium text-neutral-400 mb-1 pl-2">{title}</div>
+    <div className="flex flex-col gap-1">
+      {agents.length === 0 ? (
+        <div className="text-xs text-neutral-300 pl-4">No agents</div>
+      ) : (
+        agents.map((agent) => (
+          <AgentListItem key={agent.id} agent={agent} onSelect={onAgentSelect} />
+        ))
+      )}
     </div>
   </div>
 );
