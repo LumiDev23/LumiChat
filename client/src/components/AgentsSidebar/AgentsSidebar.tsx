@@ -15,8 +15,8 @@ const AgentsSidebar: React.FC = () => {
   const navigate = useNavigate();
 
   const handleAgentSelect = (agentId: string) => {
-    onSelect(agentId);
-    navigate('/c/new', { state: { focusChat: true } });
+    console.log('AgentsSidebar: Navigating to agent', agentId);
+    navigate(`/c/new?agent_id=${agentId}`, { state: { focusChat: true } });
   };
 
   return (

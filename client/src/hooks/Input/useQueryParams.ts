@@ -41,6 +41,7 @@ const parseQueryValue = (value: string) => {
  */
 const processValidSettings = (queryParams: Record<string, string>) => {
   const validSettings = {} as TPreset;
+  console.log('useQueryParams: Processing query params', queryParams);
 
   Object.entries(queryParams).forEach(([key, value]) => {
     try {
@@ -49,6 +50,9 @@ const processValidSettings = (queryParams: Record<string, string>) => {
         const parsedValue = parseQueryValue(value);
         const validValue = schema.parse(parsedValue);
         validSettings[key] = validValue;
+        console.log(`useQueryParams: Processed ${key} = ${validValue}`);
+      } else {
+        console.log(`useQueryParams: No schema found for ${key}`);
       }
     } catch (error) {
       console.warn(`Invalid value for setting ${key}:`, error);
@@ -111,7 +115,9 @@ export default function useQueryParams({
    */
   const newQueryConvo = useCallback(
     (_newPreset?: TPreset) => {
+      console.log('useQueryParams: newQueryConvo called with', _newPreset);
       if (!_newPreset) {
+        console.log('useQueryParams: No preset provided, returning');
         return;
       }
       let newPreset = removeUnavailableTools(_newPreset, availableTools);
