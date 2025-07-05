@@ -1,8 +1,8 @@
 // Copyrights - Luminance Labs. All rights reserved.
 
-import React from 'react';
-import type { Agent } from './types';
+import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { Agent } from './types';
 
 interface AgentListItemProps {
   agent: Agent;
@@ -26,7 +26,11 @@ const AgentListItem: React.FC<AgentListItemProps> = ({ agent, onSelect }) => {
       type="button"
     >
       {agent.avatar ? (
-        <img src={agent.avatar} alt={agent.name} className="w-6 h-6 rounded-full object-cover" />
+        <img
+          src={typeof agent.avatar === 'string' ? agent.avatar : agent.avatar.filepath}
+          alt={agent.name}
+          className="w-6 h-6 rounded-full object-cover"
+        />
       ) : (
         <div className="w-6 h-6 rounded-full bg-neutral-300 flex items-center justify-center text-xs font-bold text-neutral-600">
           {agent.name?.[0]?.toUpperCase() || '?'}
