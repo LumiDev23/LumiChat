@@ -1,9 +1,8 @@
 // Copyrights - Luminance Labs. All rights reserved.
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import type { Agent } from './types';
 import { useNavigate } from 'react-router-dom';
-import { useConversation } from '../../hooks/useConversation';
 
 interface AgentListItemProps {
   agent: Agent;
@@ -12,20 +11,10 @@ interface AgentListItemProps {
 
 const AgentListItem: React.FC<AgentListItemProps> = ({ agent, onSelect }) => {
   const navigate = useNavigate();
-  const { conversation } = useConversation();
-  const [pendingAgentId, setPendingAgentId] = useState(null);
 
   const handleAgentSelect = (agentId) => {
     onSelect(agentId);
-    setPendingAgentId(agentId);
   };
-
-  useEffect(() => {
-    if (pendingAgentId && conversation?.agent_id === pendingAgentId) {
-      navigate('/c/new', { state: { focusChat: true } });
-      setPendingAgentId(null);
-    }
-  }, [pendingAgentId, conversation?.agent_id, navigate]);
 
   return (
     <button
