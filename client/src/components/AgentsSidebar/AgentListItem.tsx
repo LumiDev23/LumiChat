@@ -36,7 +36,7 @@ const AgentListItem: React.FC<AgentListItemProps> = ({ agent, onSelect }) => {
           {agent.name?.[0]?.toUpperCase() || '?'}
         </div>
       )}
-      <span className="truncate text-sm font-medium text-neutral-800">{agent.name}</span>
+      <span className="truncate text-sm font-medium text-token-text-primary">{agent.name}</span>
     </button>
   );
 };
